@@ -21,7 +21,7 @@ urls = conf.get('Stock','url_link').replace('?type','vFD_BalanceSheet')
 stockcode_list = [ x.replace("\'","") for x in stockcodes.split(',') ]
 
 #stockcode_list = ['000001']
-reportDT_list = ['2007']
+reportDT_list = ['2017']
 sys.stdout=open(path_balancesheet+reportDT_list[0]+'.txt','w')
 
 class BalanceSheet(Spider):
@@ -41,6 +41,8 @@ class BalanceSheet(Spider):
         stockcode = v_sepSet[7]
         #Get the Report Lines, Different Lines means different Report details
         v_cnt = sel.xpath('count(//table[@id="BalanceSheetNewTable0"]/tbody/tr/td[1])').extract()[0]
+        print v_cnt
+
         v_itemSet = []
         if v_cnt == "114.0" or v_cnt == "97.0":
             #Get the Report date count, if the Report date is current year, it's different with previous year data.
